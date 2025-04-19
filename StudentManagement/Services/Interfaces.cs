@@ -28,6 +28,7 @@ public interface IGradeService
     Task AddGradeAsync(Grade grade);
     Task<List<Grade>> GetGradesAsync();
     Task UpdateGradeAsync(Grade grade);
+    
 }
 
 public interface ISubjectService
