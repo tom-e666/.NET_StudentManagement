@@ -38,4 +38,10 @@ public class Student
         if(Grades == null || Grades.Count == 0) return 0;
         return Grades.Average(x => x.Score);
     }
+
+    public virtual float CalculateAverageScoreBySemester(int semesterId)
+    {
+        if(Grades == null || Grades.Count == 0) return 0;
+        return Grades.Where(g=>g.Semester == semesterId).Average(x=>x.Score);
+    }
 }

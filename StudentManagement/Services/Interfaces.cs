@@ -9,9 +9,9 @@ public interface IStudentService
     Task<List<Student>> GetStudentsByClassIdAsync(int classId);
     Task<Student> GetStudentByStudentIdAsync(int studentId);
     Task UpdateStudentAsync(Student student);
-    Task DeleteStudentAsync(Student student);
-    Task <ICollection<Grade>> GetGradesAsync(string studentId,int semester);
-    Task <float> GetGradeAverageAsync(string studentId,int semester);
+    Task DeleteStudentAsync(int studentId);
+    Task <ICollection<Grade>> GetGradesBySemesterAsync(int studentId,int semester);
+    Task<float> GetAverageGradeBySemesterAsync(int studentId, int semester);
     
 }
 

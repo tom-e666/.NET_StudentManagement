@@ -17,7 +17,7 @@ public class Grade
     [ForeignKey("Subject")]
     public required int SubjectId { get; set; }
     [Required]
-    public required string Semester { get; set; }
+    public required int Semester { get; set; }
     public virtual Student Student { get; set; }
     public virtual Subject Subject { get; set; }
 }
