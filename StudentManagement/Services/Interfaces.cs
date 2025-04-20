@@ -46,5 +46,7 @@ public interface IUser
     Task<User> GetUserByEmailAsync(string email);
     Task UpdateUserAsync(User user);
     Task<bool> AuthenticateUserAsync(string username, string password);
+    Task<bool> CheckUsernameAvailabilityAsync(string username);
+    Task<bool> CheckEmailAvailabilityAsync(string email);
 }
 

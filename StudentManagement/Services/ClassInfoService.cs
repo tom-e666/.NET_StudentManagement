@@ -1,10 +1,11 @@
 using System.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using StudentManagement.Models;
+using StudentManagement.services;
 
 namespace StudentManagement.Services;
 
-public class ClassInfoService(ApplicationDbContext context)
+public class ClassInfoService(ApplicationDbContext context):IClassInfoService
 {
         public async Task AddClassInfoAsync(ClassInfo classInfo)
         {
