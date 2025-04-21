@@ -20,7 +20,7 @@ public class StudentController(IStudentService studentService):Controller
     //Form thêm sinh viên
     [HttpGet("Create")]
     [AuthorizeRole([RoleEnum.ADMIN, RoleEnum.TEACHER])]
-    public Task<IActionResult> Create()
+    public IActionResult Create()
     {
         return View();
     }

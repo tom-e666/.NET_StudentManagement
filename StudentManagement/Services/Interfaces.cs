@@ -20,7 +20,9 @@ public interface IClassInfoService
     Task AddClassInfoAsync(ClassInfo classInfo);
     Task<List<ClassInfo>> GetClassInfosAsync();
     Task UpdateClassInfoAsync(ClassInfo classInfo);
-    Task DeleteClassInfoAsync(ClassInfo classInfo);
+    Task DeleteClassInfoAsync(int id);
+    Task GetClassInfosBySemesterAsync(int semester);
+    Task<ClassInfo> GetClassInfoByIdAsync(int id);
 }
 
 public interface IGradeService
@@ -28,6 +30,8 @@ public interface IGradeService
     Task AddGradeAsync(Grade grade);
     Task<List<Grade>> GetGradesAsync();
     Task UpdateGradeAsync(Grade grade);
+    Task<ICollection<Grade>> GetGradesBySubjectIdAndSemesterAsync(int classId, int semester);
+    Task <ICollection<Grade>> GetGradesByStudentIdAsync(int studentId);
     
 }
 
@@ -37,7 +41,7 @@ public interface ISubjectService
     Task AddSubjectAsync(Subject subject);
     Task<List<Subject>> GetSubjectsAsync();
     Task UpdateSubjectAsync(Subject subject);
-    Task DeleteSubjectAsync(Subject subject);
+    Task DeleteSubjectAsync(int id);
 }
 public interface IUser
 {

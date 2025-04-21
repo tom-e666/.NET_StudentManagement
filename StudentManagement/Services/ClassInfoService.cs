@@ -7,6 +7,8 @@ namespace StudentManagement.Services;
 
 public class ClassInfoService(ApplicationDbContext context):IClassInfoService
 {
+        private IClassInfoService _classInfoServiceImplementation;
+
         public async Task AddClassInfoAsync(ClassInfo classInfo)
         {
                 if (await context.ClassInfos.AnyAsync(c => c.ClassCode == classInfo.ClassCode))
@@ -46,16 +48,31 @@ public class ClassInfoService(ApplicationDbContext context):IClassInfoService
                 }
         }
 
-       public async Task DeleteClassInfoAsync(ClassInfo classInfo)
+       public async Task DeleteClassInfoAsync(int id)
         {
                 var existing = context.ClassInfos
                                        .Include(c => c.Students)
-                                       .FirstOrDefault(c => c.Id == classInfo.Id)
+                                       .FirstOrDefault(c => c.Id == id)
                                ?? throw new ApplicationException($"Lớp học không tồn tại");
                 if (existing.Students.Any())
-                        throw new ApplicationException($"Có sinh viên thuộc lớp ${classInfo.ClassName} không thể xóa");
+                        throw new ApplicationException($"Có sinh viên thuộc lớp, không thể xóa");
                 context.ClassInfos.Remove(existing);
                 await context.SaveChangesAsync();
         }
-    
+
+        public Task GetClassInfosBySemesterAsync(int semester)
+        {
+                throw new NotImplementedException();
+        }
+
+        public async Task<ClassInfo> GetClassInfoByIdAsync(int id)
+        {
+                
+                var classInfo = await context.ClassInfos
+                                        .Include(c => c.Students)
+                                        .FirstOrDefaultAsync(c => c.Id == id)
+                                ?? throw new ApplicationException("Không tìm thấy lớp");
+                return classInfo;
+                
+        }
 }

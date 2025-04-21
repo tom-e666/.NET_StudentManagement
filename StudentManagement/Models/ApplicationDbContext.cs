@@ -24,7 +24,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .WithMany(s => s.Grades)
             .HasForeignKey(g => g.StudentId);
         builder.Entity<User>()
-            .HasIndex(u=>u.UserName)
+            .HasIndex(u=>u.Username)
             .IsUnique();
     }
     

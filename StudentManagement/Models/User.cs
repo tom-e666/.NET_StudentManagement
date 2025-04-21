@@ -3,16 +3,17 @@ using Microsoft.AspNetCore.Identity;
 
 namespace StudentManagement.Models;
 
-public class User:IdentityUser
+public class User
 {
     [Key]
     public int Id { get; set; }
     [Required]
     [StringLength(50)]
     public required string Username { get; set; }
+    
     [Required]
     [StringLength(256)]
-    public required string Passworhash { get; set; }
+    public required string PasswordHash { get; set; }
     
     [StringLength(256)]
     public required string Email { get; set; }

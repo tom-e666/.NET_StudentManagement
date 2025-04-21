@@ -43,4 +43,18 @@ public class GradeService(ApplicationDbContext context):IGradeService
             throw new ApplicationException(e.Message,e.InnerException);
         } 
     }
+
+    public async Task<ICollection<Grade>> GetGradesBySubjectIdAndSemesterAsync(int subjectId, int semester)
+    {
+        
+        var result = await context.Grades.Include(g => g.Student)
+                         .Where(e => e.SubjectId == subjectId && e.Semester == semester).ToListAsync()
+                     ?? throw new ApplicationException("Không tìm thấy kết quả nào");
+        return result;
+    }
+
+    public Task<ICollection<Grade>> GetGradesByStudentIdAsync(int studentId)
+    {
+        throw new NotImplementedException();
+    }
 }

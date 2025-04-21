@@ -50,16 +50,20 @@ public class SubjectService(ApplicationDbContext context): ISubjectService
         
     }
 
-    public async Task DeleteSubjectAsync(Subject subject)
+    public async Task DeleteSubjectAsync(int id)
     {
         var exisisting = await context.Subjects.Include(e=>e.Grades)
-                             .FirstOrDefaultAsync(e=>e.Id==subject.Id)??
+                             .FirstOrDefaultAsync(e=>e.Id==id)??
                          throw new ApplicationException("Không tìm thấy môn học");
         try
         {
-            if(exisisting.Grades.Any())
+            if (exisisting.Grades.Any())
+            {
                 context.Grades.RemoveRange(exisisting.Grades);
-            context.Subjects.Remove(subject);
+                Console.WriteLine(" Tồn tại bản ghi điểm, hiện tại đã bị xóa");
+            }
+                
+            context.Subjects.Remove(exisisting);
             await context.SaveChangesAsync();
         }
         catch (Exception e)
